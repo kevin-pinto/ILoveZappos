@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">ILoveZappos</string>
+    <string name="title_activity_product_detail">Product Detail</string>
+    <string name="title_activity_search">Search</string>
+    <string name="loren_ipsum_long">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
+    <string name="loren_ipsum_short">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</string>
+    <string name="product_price">Price: <font color='#FF0000'>%s</font></string>
+    <string name="product_og_price">Original Price: <font color='blue'>%s</font></string>
+    <string name="product_you_save">You Save: %1$s (%2$s)</string>
+    <string name="in_stock">In Stock</string>
+    <string name="search_hint">What are you looking for?</string>
+    <!--default texts-->
+       <string name="default_review_count">(502 reviews)</string>
+
+
+</resources>
