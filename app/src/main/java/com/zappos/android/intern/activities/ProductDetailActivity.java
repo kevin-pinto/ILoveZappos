@@ -1,13 +1,11 @@
 package com.zappos.android.intern.activities;
 
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.Random;
 
 import com.zappos.android.intern.R;
 import com.zappos.android.intern.databinding.ActivityProductDetailBinding;
 import com.zappos.android.intern.framework.BaseActivity;
+import com.zappos.android.intern.helpers.FetchImageAsyncTask;
 import com.zappos.android.intern.modal.Product;
 import com.zappos.android.intern.modal.retro.ProductList;
 import com.zappos.android.intern.utils.Constants;
@@ -15,7 +13,6 @@ import com.zappos.android.intern.utils.RetroAPIUtils;
 
 import android.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -95,27 +92,14 @@ public class ProductDetailActivity extends BaseActivity implements Callback<Prod
 		ActivityProductDetailBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_product_detail);
 		binding.setProduct(product);
 		//		setPager(product.getThumbnailURL());
-		setImageContent(product.getThumbnailURL()); //TODO: Delete this and use pager. Expensive on UI thread.
+		new FetchImageAsyncTask(this).execute(product.getThumbnailURL()); //TODO: Delete this and use pager. Expensive on UI thread.
 	}
 
-	/**
-	 * Setting product image. TODO: Delete this.
-	 * 
+	/*
+	 * Setting product image.TODO:Delete this.**
 	 * @param thumbnailUrl
 	 */
-	private void setImageContent(String thumbnailUrl) {
-		ImageView iv = (ImageView) findViewById(R.id.ivProductImage);
-		Bitmap myBitmap = null;
-		try {
-			URL url = new URL(thumbnailUrl);
-			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-			connection.setDoInput(true);
-			connection.connect();
-			InputStream input = connection.getInputStream();
-			myBitmap = BitmapFactory.decodeStream(input);
-		} catch (Exception ex) {
-			myBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.img_unavailable);
-		}
-		iv.setImageBitmap(myBitmap);
+	public void onImageLoadComplete(Bitmap bitmap) {
+		((ImageView) findViewById(R.id.ivProductImage)).setImageBitmap(bitmap);
 	}
 }
